@@ -1,0 +1,47 @@
+/*
+  Identidade visual do AgendaFácil: editorial-brutalista e quente.
+  Bordas de tinta sólidas, sombra "deslocada" (sem blur) em vez do
+  soft-shadow genérico de SaaS, papel creme em vez de branco puro,
+  serifada de personalidade (Fraunces) para títulos.
+*/
+:root {
+  --cor-primaria: #ff6b45;
+  --cor-primaria-escura: #e2502c;
+  --cor-primaria-clara: #ffe4d9;
+
+  --cor-tinta: #1c1b2e;
+  --cor-tinta-suave: #4d4b63;
+  --cor-tinta-fraca: #8b899e;
+
+  --cor-fundo: #fdf6ec;
+  --cor-superficie: #fffdf9;
+  --cor-borda: #1c1b2e;
+
+  --cor-sucesso: #1f7a4d;
+  --cor-sucesso-fundo: #e2f5e9;
+  --cor-pendente: #b5750a;
+  --cor-pendente-fundo: #fbedd3;
+  --cor-alerta: #c22e3a;
+  --cor-alerta-fundo: #fbe4e2;
+
+  --fonte-display: "Fraunces", "Georgia", serif;
+  --fonte-corpo: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --espaco-1: 4px;
+  --espaco-2: 8px;
+  --espaco-3: 12px;
+  --espaco-4: 16px;
+  --espaco-5: 24px;
+  --espaco-6: 32px;
+  --espaco-7: 48px;
+  --espaco-8: 64px;
+
+  --raio-sm: 10px;
+  --raio-md: 16px;
+  --raio-lg: 26px;
+  --raio-pill: 999px;
+
+  --sombra-deslocada-sm: 3px 3px 0 var(--cor-tinta);
+  --sombra-deslocada-md: 6px 6px 0 var(--cor-tinta);
+  --sombra-primaria: 6px 6px 0 var(--cor-primaria-escura);
+}
