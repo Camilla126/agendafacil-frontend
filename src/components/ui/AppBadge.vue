@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   status: { type: String, required: true }, // confirmado | pendente | cancelado
 })
 
@@ -11,33 +11,49 @@ const rotulos = {
 </script>
 
 <template>
-  <span class="app-badge" :class="`app-badge--${status}`">{{ rotulos[status] ?? status }}</span>
+  <span class="app-selo" :class="`app-selo--${status}`">
+    <span class="app-selo__ponto" />
+    {{ rotulos[status] ?? status }}
+  </span>
 </template>
 
 <style scoped>
-.app-badge {
-  display: inline-block;
-  padding: var(--espaco-1) var(--espaco-3);
-  border-radius: var(--raio-pill);
-  font-size: 0.8rem;
-  font-weight: 700;
+.app-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-2);
+  font-family: var(--fonte-numero);
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
-.app-badge--confirmado {
-  background: var(--cor-sucesso-fundo);
-  color: var(--cor-sucesso);
+.app-selo__ponto {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
 }
 
-.app-badge--pendente {
-  background: var(--cor-pendente-fundo);
-  color: var(--cor-pendente);
+.app-selo--confirmado {
+  color: var(--verde-carimbo);
+}
+.app-selo--confirmado .app-selo__ponto {
+  background: var(--verde-carimbo);
 }
 
-.app-badge--cancelado {
-  background: var(--cor-alerta-fundo);
-  color: var(--cor-alerta);
+.app-selo--pendente {
+  color: var(--ambar-carimbo);
+}
+.app-selo--pendente .app-selo__ponto {
+  background: var(--ambar-carimbo);
+}
+
+.app-selo--cancelado {
+  color: var(--tinta-fraca);
   text-decoration: line-through;
+}
+.app-selo--cancelado .app-selo__ponto {
+  background: var(--tinta-fraca);
 }
 </style>

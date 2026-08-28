@@ -19,69 +19,65 @@ defineProps({
   justify-content: center;
   gap: var(--espaco-2);
   padding: var(--espaco-3) var(--espaco-5);
-  border-radius: var(--raio-pill);
-  border: 2px solid var(--cor-borda);
-  font-weight: 600;
-  font-size: 0.95rem;
+  border-radius: 0;
+  border: 2px solid var(--tinta);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
-  white-space: nowrap;
+  transition: background-color 0.1s ease, color 0.1s ease, transform 0.05s ease;
 }
 
 .app-botao:active:not(:disabled) {
-  transform: translate(3px, 3px);
-  box-shadow: none !important;
+  transform: translateY(1px);
 }
 
 .app-botao:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
 .app-botao--primaria {
-  background: var(--cor-primaria);
-  color: var(--cor-tinta);
-  box-shadow: var(--sombra-deslocada-sm);
+  background: var(--azul-selo);
+  border-color: var(--azul-selo);
+  color: var(--papel);
 }
 
 .app-botao--primaria:hover:not(:disabled) {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 var(--cor-tinta);
+  background: var(--azul-selo-escuro);
+  border-color: var(--azul-selo-escuro);
 }
 
 .app-botao--secundaria {
-  background: var(--cor-superficie);
-  color: var(--cor-tinta);
-  box-shadow: var(--sombra-deslocada-sm);
+  background: var(--papel);
+  color: var(--tinta);
 }
 
 .app-botao--secundaria:hover:not(:disabled) {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 var(--cor-tinta);
+  background: var(--contracapa);
 }
 
 .app-botao--perigo {
-  background: var(--cor-alerta-fundo);
-  color: var(--cor-alerta);
-  border-color: var(--cor-alerta);
-  box-shadow: 3px 3px 0 var(--cor-alerta);
+  background: var(--papel);
+  color: var(--vermelho-carimbo);
+  border-color: var(--vermelho-carimbo);
 }
 
 .app-botao--perigo:hover:not(:disabled) {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 var(--cor-alerta);
+  background: var(--vermelho-carimbo-fundo);
 }
 
 .app-botao--fantasma {
   background: transparent;
-  color: var(--cor-tinta-suave);
+  color: var(--tinta-suave);
   border-color: transparent;
-  box-shadow: none;
   padding: var(--espaco-2) var(--espaco-3);
 }
 
 .app-botao--fantasma:hover:not(:disabled) {
-  color: var(--cor-tinta);
+  color: var(--tinta);
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 </style>

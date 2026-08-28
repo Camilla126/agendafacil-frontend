@@ -12,11 +12,10 @@ defineProps({
 
 <style scoped>
 .app-alerta {
-  background: var(--cor-alerta-fundo);
-  border: 2px solid var(--cor-alerta);
-  border-radius: var(--raio-sm);
+  background: var(--vermelho-carimbo-fundo);
+  border-left: 4px solid var(--vermelho-carimbo);
   padding: var(--espaco-3) var(--espaco-4);
-  color: var(--cor-alerta);
+  color: var(--vermelho-carimbo);
   font-weight: 500;
   font-size: 0.9rem;
 }

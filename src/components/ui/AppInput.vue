@@ -35,35 +35,37 @@ defineEmits(["update:modelValue"])
 
 .app-campo__rotulo {
   font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--cor-tinta-suave);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tinta-suave);
 }
 
 .app-campo__obrigatorio {
-  color: var(--cor-primaria-escura);
+  color: var(--led);
 }
 
 .app-campo__input {
-  padding: var(--espaco-3) var(--espaco-4);
-  border: 2px solid var(--cor-borda);
-  border-radius: var(--raio-sm);
-  background: var(--cor-superficie);
+  padding: var(--espaco-3) var(--espaco-3);
+  border: none;
+  border-bottom: 2px solid var(--contracapa-forte);
+  border-radius: 0;
+  background: transparent;
   font-size: 1rem;
-  transition: box-shadow 0.15s ease;
+  transition: border-color 0.1s ease;
 }
 
 .app-campo__input:focus {
-  outline: none;
-  box-shadow: var(--sombra-deslocada-sm);
+  border-color: var(--azul-selo);
 }
 
 .app-campo__input--erro {
-  border-color: var(--cor-alerta);
+  border-color: var(--vermelho-carimbo);
 }
 
 .app-campo__erro {
-  font-size: 0.85rem;
-  color: var(--cor-alerta);
+  font-size: 0.8rem;
+  color: var(--vermelho-carimbo);
   font-weight: 500;
 }
 </style>
