@@ -1,31 +1,36 @@
 /*
-  Identidade visual do AgendaFácil: editorial-brutalista e quente.
-  Bordas de tinta sólidas, sombra "deslocada" (sem blur) em vez do
-  soft-shadow genérico de SaaS, papel creme em vez de branco puro,
-  serifada de personalidade (Fraunces) para títulos.
+  Identidade visual do AgendaFácil: painel de senha de atendimento
+  (banco, clínica, padaria — a cultura de "tire sua senha" no Brasil).
+  Nada de cantos arredondados nem sombra suave: recibo, aba de balcão,
+  ticket com entalhe de picote, números em display tipo painel eletrônico.
 */
 :root {
-  --cor-primaria: #ff6b45;
-  --cor-primaria-escura: #e2502c;
-  --cor-primaria-clara: #ffe4d9;
+  --papel: #faf9f6;
+  --papel-fundo: #f1efe9;
+  --contracapa: #e6e9ed;
+  --contracapa-forte: #c9ced6;
 
-  --cor-tinta: #1c1b2e;
-  --cor-tinta-suave: #4d4b63;
-  --cor-tinta-fraca: #8b899e;
+  --tinta: #14181d;
+  --tinta-suave: #4d5560;
+  --tinta-fraca: #8a9099;
 
-  --cor-fundo: #fdf6ec;
-  --cor-superficie: #fffdf9;
-  --cor-borda: #1c1b2e;
+  --azul-selo: #2454a6;
+  --azul-selo-escuro: #1a3d80;
+  --azul-selo-fundo: #e3eaf6;
 
-  --cor-sucesso: #1f7a4d;
-  --cor-sucesso-fundo: #e2f5e9;
-  --cor-pendente: #b5750a;
-  --cor-pendente-fundo: #fbedd3;
-  --cor-alerta: #c22e3a;
-  --cor-alerta-fundo: #fbe4e2;
+  --led: #e5241c;
+  --led-fundo: #2a1210;
 
-  --fonte-display: "Fraunces", "Georgia", serif;
-  --fonte-corpo: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --verde-carimbo: #1f7a5c;
+  --verde-carimbo-fundo: #e4f2ec;
+  --ambar-carimbo: #a5670d;
+  --ambar-carimbo-fundo: #faf0dc;
+  --vermelho-carimbo: #b23a2e;
+  --vermelho-carimbo-fundo: #fae7e4;
+
+  --fonte-titulo: "Big Shoulders", "Arial Narrow", sans-serif;
+  --fonte-corpo: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --fonte-numero: "Martian Mono", "IBM Plex Mono", monospace;
 
   --espaco-1: 4px;
   --espaco-2: 8px;
@@ -36,12 +41,6 @@
   --espaco-7: 48px;
   --espaco-8: 64px;
 
-  --raio-sm: 10px;
-  --raio-md: 16px;
-  --raio-lg: 26px;
-  --raio-pill: 999px;
-
-  --sombra-deslocada-sm: 3px 3px 0 var(--cor-tinta);
-  --sombra-deslocada-md: 6px 6px 0 var(--cor-tinta);
-  --sombra-primaria: 6px 6px 0 var(--cor-primaria-escura);
+  --traco: 1px solid var(--contracapa-forte);
+  --traco-forte: 2px solid var(--tinta);
 }

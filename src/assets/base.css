@@ -14,11 +14,8 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--cor-fundo);
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(28, 27, 46, 0.08) 1px, transparent 0);
-  background-size: 22px 22px;
-  color: var(--cor-tinta);
+  background: var(--papel-fundo);
+  color: var(--tinta);
   font-family: var(--fonte-corpo);
   font-size: 16px;
   line-height: 1.5;
@@ -26,10 +23,12 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--fonte-display);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-wrap: balance;
 }
 
 button {
@@ -47,4 +46,16 @@ ul, ol {
 input, select, textarea {
   font: inherit;
   color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--azul-selo);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
