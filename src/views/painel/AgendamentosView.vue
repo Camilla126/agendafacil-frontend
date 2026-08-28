@@ -20,30 +20,35 @@ async function cancelar(id) {
 
 function formatarData(data) {
   const [ano, mes, dia] = data.split('-')
-  return `${dia}/${mes}/${ano}`
+  return `${dia}/${mes}`
 }
 
 function horaCurta(valorIso) {
   return valorIso.slice(11, 16)
+}
+
+function numeroDoTicket(id) {
+  return String(id).padStart(4, '0')
 }
 </script>
 
 <template>
   <section>
     <header class="cabecalho">
+      <p class="cabecalho__guiche">Guichê 03</p>
       <h1>Agendamentos</h1>
-      <p>Sua agenda, do jeito que os clientes marcaram.</p>
+      <p class="cabecalho__descricao">Sua agenda, do jeito que os clientes marcaram.</p>
     </header>
 
-    <ul v-if="store.lista.length" class="lista">
-      <li v-for="agendamento in store.lista" :key="agendamento.id" class="lista__item">
-        <div class="lista__quando">
-          <p class="lista__data">{{ formatarData(agendamento.data) }}</p>
-          <p class="lista__hora">{{ horaCurta(agendamento.hora_inicio) }}–{{ horaCurta(agendamento.hora_fim) }}</p>
-        </div>
-        <div class="lista__cliente">
-          <p class="lista__nome">{{ agendamento.cliente_nome }}</p>
-          <p class="lista__detalhe">{{ agendamento.cliente_email }}</p>
+    <ul v-if="store.lista.length" class="recibo">
+      <li v-for="agendamento in store.lista" :key="agendamento.id" class="recibo__linha">
+        <span class="recibo__ticket">Nº {{ numeroDoTicket(agendamento.id) }}</span>
+        <span class="recibo__display">{{ horaCurta(agendamento.hora_inicio) }}</span>
+        <div class="recibo__corpo">
+          <p class="recibo__nome">{{ agendamento.cliente_nome }}</p>
+          <p class="recibo__detalhe">
+            {{ formatarData(agendamento.data) }} · {{ agendamento.cliente_email }}
+          </p>
         </div>
         <AppBadge :status="agendamento.status" />
         <AppButton
@@ -65,52 +70,69 @@ function horaCurta(valorIso) {
   margin-bottom: var(--espaco-6);
 }
 
-.cabecalho p {
-  color: var(--cor-tinta-suave);
-  margin-top: var(--espaco-1);
+.cabecalho__guiche {
+  font-family: var(--fonte-numero);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--azul-selo);
+  margin-bottom: var(--espaco-2);
 }
 
-.lista {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-3);
+.cabecalho h1 {
+  font-size: 2rem;
 }
 
-.lista__item {
+.cabecalho__descricao {
+  color: var(--tinta-suave);
+  margin-top: var(--espaco-2);
+}
+
+.recibo {
+  border-top: var(--traco-forte);
+}
+
+.recibo__linha {
   display: grid;
-  grid-template-columns: 110px 1fr auto auto;
+  grid-template-columns: auto auto 1fr auto auto;
   align-items: center;
   gap: var(--espaco-4);
-  background: var(--cor-superficie);
-  border: 2px solid var(--cor-borda);
-  border-radius: var(--raio-sm);
-  padding: var(--espaco-4);
+  padding: var(--espaco-4) 0;
+  border-bottom: var(--traco);
 }
 
-.lista__data {
+.recibo__ticket {
+  font-family: var(--fonte-numero);
+  font-size: 0.75rem;
+  color: var(--tinta-fraca);
+}
+
+.recibo__display {
+  font-family: var(--fonte-numero);
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: var(--led-fundo);
+  color: var(--led);
+  padding: var(--espaco-2) var(--espaco-3);
+}
+
+.recibo__nome {
   font-weight: 700;
 }
 
-.lista__hora {
-  color: var(--cor-tinta-suave);
+.recibo__detalhe {
+  color: var(--tinta-suave);
   font-size: 0.85rem;
-}
-
-.lista__nome {
-  font-weight: 600;
-}
-
-.lista__detalhe {
-  color: var(--cor-tinta-suave);
-  font-size: 0.85rem;
+  margin-top: var(--espaco-1);
 }
 
 .vazio {
-  color: var(--cor-tinta-fraca);
+  color: var(--tinta-fraca);
+  padding: var(--espaco-4) 0;
 }
 
-@media (max-width: 640px) {
-  .lista__item {
+@media (max-width: 720px) {
+  .recibo__linha {
     grid-template-columns: 1fr;
     justify-items: start;
   }

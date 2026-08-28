@@ -46,8 +46,9 @@ function horaCurta(valorIso) {
 <template>
   <section>
     <header class="cabecalho">
+      <p class="cabecalho__guiche">Guichê 02</p>
       <h1>Disponibilidade</h1>
-      <p>Os dias e horários em que você atende. Pode cadastrar mais de um bloco por dia.</p>
+      <p class="cabecalho__descricao">Os dias e horários em que você atende. Pode cadastrar mais de um bloco por dia.</p>
     </header>
 
     <AppCard class="formulario-card">
@@ -75,11 +76,12 @@ function horaCurta(valorIso) {
       </form>
     </AppCard>
 
-    <ul v-if="store.lista.length" class="lista">
-      <li v-for="disponibilidade in store.lista" :key="disponibilidade.id" class="lista__item">
-        <div>
-          <p class="lista__nome">{{ DIAS[disponibilidade.dia_semana] }}</p>
-          <p class="lista__detalhe">
+    <ul v-if="store.lista.length" class="recibo">
+      <li v-for="disponibilidade in store.lista" :key="disponibilidade.id" class="recibo__linha">
+        <span class="recibo__dia">{{ DIAS[disponibilidade.dia_semana].slice(0, 3) }}</span>
+        <div class="recibo__corpo">
+          <p class="recibo__nome">{{ DIAS[disponibilidade.dia_semana] }}</p>
+          <p class="recibo__detalhe">
             {{ horaCurta(disponibilidade.hora_inicio) }} às {{ horaCurta(disponibilidade.hora_fim) }}
           </p>
         </div>
@@ -95,9 +97,22 @@ function horaCurta(valorIso) {
   margin-bottom: var(--espaco-6);
 }
 
-.cabecalho p {
-  color: var(--cor-tinta-suave);
-  margin-top: var(--espaco-1);
+.cabecalho__guiche {
+  font-family: var(--fonte-numero);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--azul-selo);
+  margin-bottom: var(--espaco-2);
+}
+
+.cabecalho h1 {
+  font-size: 2rem;
+}
+
+.cabecalho__descricao {
+  color: var(--tinta-suave);
+  margin-top: var(--espaco-2);
 }
 
 .formulario-card {
@@ -121,47 +136,68 @@ function horaCurta(valorIso) {
   flex-direction: column;
   gap: var(--espaco-2);
   font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--cor-tinta-suave);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tinta-suave);
 }
 
 .campo-select select,
 .campo-select input {
-  padding: var(--espaco-3) var(--espaco-4);
-  border: 2px solid var(--cor-borda);
-  border-radius: var(--raio-sm);
-  background: var(--cor-superficie);
+  padding: var(--espaco-3) var(--espaco-3);
+  border: none;
+  border-bottom: 2px solid var(--contracapa-forte);
+  border-radius: 0;
+  background: transparent;
   font-size: 1rem;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
-.lista {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-3);
+.campo-select select:focus,
+.campo-select input:focus {
+  outline: none;
+  border-color: var(--azul-selo);
 }
 
-.lista__item {
+.recibo {
+  border-top: var(--traco-forte);
+}
+
+.recibo__linha {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: var(--cor-superficie);
-  border: 2px solid var(--cor-borda);
-  border-radius: var(--raio-sm);
-  padding: var(--espaco-4);
+  gap: var(--espaco-4);
+  padding: var(--espaco-4) 0;
+  border-bottom: var(--traco);
 }
 
-.lista__nome {
+.recibo__dia {
+  font-family: var(--fonte-numero);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+  width: 32px;
+}
+
+.recibo__corpo {
+  flex: 1;
+}
+
+.recibo__nome {
   font-weight: 700;
 }
 
-.lista__detalhe {
-  color: var(--cor-tinta-suave);
+.recibo__detalhe {
+  color: var(--tinta-suave);
   font-size: 0.9rem;
   margin-top: var(--espaco-1);
+  font-family: var(--fonte-numero);
 }
 
 .vazio {
-  color: var(--cor-tinta-fraca);
+  color: var(--tinta-fraca);
+  padding: var(--espaco-4) 0;
 }
 
 @media (max-width: 640px) {

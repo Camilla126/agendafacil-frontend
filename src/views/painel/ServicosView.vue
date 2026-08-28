@@ -44,13 +44,18 @@ function formatarValor(valor) {
   if (valor === null || valor === undefined) return null
   return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
+
+function numeroDoTicket(indice) {
+  return String(indice + 1).padStart(3, '0')
+}
 </script>
 
 <template>
   <section>
     <header class="cabecalho">
+      <p class="cabecalho__guiche">Guichê 01</p>
       <h1>Serviços</h1>
-      <p>O que você oferece, e quanto tempo cada atendimento leva.</p>
+      <p class="cabecalho__descricao">O que você oferece, e quanto tempo cada atendimento leva.</p>
     </header>
 
     <AppCard class="formulario-card">
@@ -67,11 +72,12 @@ function formatarValor(valor) {
       </form>
     </AppCard>
 
-    <ul v-if="store.lista.length" class="lista">
-      <li v-for="servico in store.lista" :key="servico.id" class="lista__item">
-        <div>
-          <p class="lista__nome">{{ servico.nome }}</p>
-          <p class="lista__detalhe">
+    <ul v-if="store.lista.length" class="recibo">
+      <li v-for="(servico, indice) in store.lista" :key="servico.id" class="recibo__linha">
+        <span class="recibo__numero">{{ numeroDoTicket(indice) }}</span>
+        <div class="recibo__corpo">
+          <p class="recibo__nome">{{ servico.nome }}</p>
+          <p class="recibo__detalhe">
             {{ servico.duracao_minutos }} min
             <span v-if="formatarValor(servico.valor)"> · {{ formatarValor(servico.valor) }}</span>
           </p>
@@ -88,9 +94,22 @@ function formatarValor(valor) {
   margin-bottom: var(--espaco-6);
 }
 
-.cabecalho p {
-  color: var(--cor-tinta-suave);
-  margin-top: var(--espaco-1);
+.cabecalho__guiche {
+  font-family: var(--fonte-numero);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--azul-selo);
+  margin-bottom: var(--espaco-2);
+}
+
+.cabecalho h1 {
+  font-size: 2rem;
+}
+
+.cabecalho__descricao {
+  color: var(--tinta-suave);
+  margin-top: var(--espaco-2);
 }
 
 .formulario-card {
@@ -109,34 +128,42 @@ function formatarValor(valor) {
   gap: var(--espaco-4);
 }
 
-.lista {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-3);
+.recibo {
+  border-top: var(--traco-forte);
 }
 
-.lista__item {
+.recibo__linha {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: var(--cor-superficie);
-  border: 2px solid var(--cor-borda);
-  border-radius: var(--raio-sm);
-  padding: var(--espaco-4);
+  gap: var(--espaco-4);
+  padding: var(--espaco-4) 0;
+  border-bottom: var(--traco);
 }
 
-.lista__nome {
+.recibo__numero {
+  font-family: var(--fonte-numero);
+  font-size: 0.8rem;
+  color: var(--tinta-fraca);
+}
+
+.recibo__corpo {
+  flex: 1;
+}
+
+.recibo__nome {
   font-weight: 700;
 }
 
-.lista__detalhe {
-  color: var(--cor-tinta-suave);
+.recibo__detalhe {
+  color: var(--tinta-suave);
   font-size: 0.9rem;
   margin-top: var(--espaco-1);
+  font-family: var(--fonte-numero);
 }
 
 .vazio {
-  color: var(--cor-tinta-fraca);
+  color: var(--tinta-fraca);
+  padding: var(--espaco-4) 0;
 }
 
 @media (max-width: 640px) {
