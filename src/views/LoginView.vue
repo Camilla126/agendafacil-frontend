@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import { mensagensDeErro } from '@/utils/erros'
 import AppButton from '@/components/ui/AppButton.vue'
 import AppInput from '@/components/ui/AppInput.vue'
 import AppCard from '@/components/ui/AppCard.vue'
@@ -33,12 +32,12 @@ async function enviar() {
 <template>
   <div class="pagina-auth">
     <div class="pagina-auth__marca">
-      Agenda<span class="pagina-auth__marca-acento">Fácil</span>
+      Agenda<em>Fácil</em>
     </div>
 
     <AppCard class="pagina-auth__card">
+      <p class="pagina-auth__eyebrow">Guichê 00 · Identificação</p>
       <h1>Entrar</h1>
-      <p class="pagina-auth__subtitulo">Acesse o painel para gerenciar sua agenda.</p>
 
       <form class="pagina-auth__form" @submit.prevent="enviar">
         <AppAlerta :mensagens="erros" />
@@ -68,13 +67,15 @@ async function enviar() {
 }
 
 .pagina-auth__marca {
-  font-family: var(--fonte-display);
+  font-family: var(--fonte-titulo);
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
-.pagina-auth__marca-acento {
-  color: var(--cor-primaria);
+.pagina-auth__marca em {
+  font-style: normal;
+  color: var(--azul-selo);
 }
 
 .pagina-auth__card {
@@ -82,9 +83,17 @@ async function enviar() {
   max-width: 380px;
 }
 
-.pagina-auth__subtitulo {
-  color: var(--cor-tinta-suave);
-  margin-top: var(--espaco-2);
+.pagina-auth__eyebrow {
+  font-family: var(--fonte-numero);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tinta-fraca);
+  margin-bottom: var(--espaco-2);
+}
+
+.pagina-auth__card h1 {
+  font-size: 1.8rem;
   margin-bottom: var(--espaco-5);
 }
 
@@ -97,12 +106,12 @@ async function enviar() {
 .pagina-auth__rodape {
   margin-top: var(--espaco-5);
   font-size: 0.9rem;
-  color: var(--cor-tinta-suave);
+  color: var(--tinta-suave);
   text-align: center;
 }
 
 .pagina-auth__rodape a {
-  color: var(--cor-primaria-escura);
+  color: var(--azul-selo);
   font-weight: 600;
 }
 </style>

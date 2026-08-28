@@ -5,6 +5,12 @@ import { useAuthStore } from '@/stores/auth'
 const auth = useAuthStore()
 const router = useRouter()
 
+const GUICHES = [
+  { numero: '01', rotulo: 'Serviços', rota: '/painel/servicos' },
+  { numero: '02', rotulo: 'Disponibilidade', rota: '/painel/disponibilidade' },
+  { numero: '03', rotulo: 'Agendamentos', rota: '/painel/agendamentos' },
+]
+
 function sair() {
   auth.logout()
   router.push('/login')
@@ -13,15 +19,22 @@ function sair() {
 
 <template>
   <div class="painel">
-    <aside class="painel__barra-lateral">
+    <aside class="painel__balcao">
       <div class="painel__marca">
-        Agenda<span class="painel__marca-ponto">Fácil</span><span class="painel__marca-acento">.</span>
+        <span class="painel__marca-texto">Agenda<em>Fácil</em></span>
+        <span class="painel__marca-linha">painel do profissional</span>
       </div>
 
-      <nav class="painel__navegacao">
-        <RouterLink to="/painel/servicos" class="painel__link">Serviços</RouterLink>
-        <RouterLink to="/painel/disponibilidade" class="painel__link">Disponibilidade</RouterLink>
-        <RouterLink to="/painel/agendamentos" class="painel__link">Agendamentos</RouterLink>
+      <nav class="painel__guiches">
+        <RouterLink
+          v-for="guiche in GUICHES"
+          :key="guiche.rota"
+          :to="guiche.rota"
+          class="painel__guiche"
+        >
+          <span class="painel__guiche-numero">{{ guiche.numero }}</span>
+          <span class="painel__guiche-rotulo">{{ guiche.rotulo }}</span>
+        </RouterLink>
       </nav>
 
       <div class="painel__rodape">
@@ -32,7 +45,7 @@ function sair() {
           target="_blank"
           rel="noopener"
         >
-          Ver minha página pública ↗
+          Ver página pública ↗
         </a>
         <p class="painel__usuario">{{ auth.profissional?.nome }}</p>
         <button class="painel__sair" type="button" @click="sair">Sair</button>
@@ -51,71 +64,104 @@ function sair() {
   min-height: 100vh;
 }
 
-.painel__barra-lateral {
-  width: 260px;
+.painel__balcao {
+  width: 280px;
   flex-shrink: 0;
-  background: var(--cor-tinta);
-  color: var(--cor-fundo);
+  background: var(--papel);
+  border-right: var(--traco-forte);
   display: flex;
   flex-direction: column;
-  padding: var(--espaco-6) var(--espaco-5);
+  padding: var(--espaco-6) 0;
   position: sticky;
   top: 0;
   height: 100vh;
 }
 
 .painel__marca {
-  font-family: var(--fonte-display);
-  font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: var(--espaco-7);
+  padding: 0 var(--espaco-5) var(--espaco-6);
+  border-bottom: var(--traco);
+  margin-bottom: var(--espaco-4);
 }
 
-.painel__marca-ponto {
-  color: var(--cor-primaria);
+.painel__marca-texto {
+  display: block;
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
-.painel__marca-acento {
-  color: var(--cor-primaria);
+.painel__marca-texto em {
+  font-style: normal;
+  color: var(--azul-selo);
 }
 
-.painel__navegacao {
+.painel__marca-linha {
+  display: block;
+  font-family: var(--fonte-numero);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tinta-fraca);
+  margin-top: var(--espaco-1);
+}
+
+.painel__guiches {
   display: flex;
   flex-direction: column;
-  gap: var(--espaco-2);
   flex: 1;
 }
 
-.painel__link {
-  padding: var(--espaco-3) var(--espaco-4);
-  border-radius: var(--raio-sm);
-  font-weight: 600;
-  color: rgba(253, 246, 236, 0.75);
+.painel__guiche {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espaco-3);
+  padding: var(--espaco-4) var(--espaco-5);
+  border-left: 4px solid transparent;
   text-decoration: none;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  color: var(--tinta-suave);
+  transition: background-color 0.1s ease, border-color 0.1s ease, color 0.1s ease;
 }
 
-.painel__link:hover {
-  background: rgba(253, 246, 236, 0.08);
-  color: var(--cor-fundo);
+.painel__guiche:hover {
+  background: var(--papel-fundo);
 }
 
-.painel__link.router-link-active {
-  background: var(--cor-primaria);
-  color: var(--cor-tinta);
+.painel__guiche-numero {
+  font-family: var(--fonte-numero);
+  font-size: 0.8rem;
+  color: var(--tinta-fraca);
+}
+
+.painel__guiche-rotulo {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.9rem;
+}
+
+.painel__guiche.router-link-active {
+  border-left-color: var(--azul-selo);
+  background: var(--azul-selo-fundo);
+  color: var(--tinta);
+}
+
+.painel__guiche.router-link-active .painel__guiche-numero {
+  color: var(--azul-selo);
 }
 
 .painel__rodape {
-  border-top: 1px solid rgba(253, 246, 236, 0.15);
-  padding-top: var(--espaco-4);
+  border-top: var(--traco);
+  padding: var(--espaco-4) var(--espaco-5) 0;
   display: flex;
   flex-direction: column;
   gap: var(--espaco-2);
 }
 
 .painel__link-publico {
-  font-size: 0.85rem;
-  color: var(--cor-primaria);
+  font-size: 0.8rem;
+  color: var(--azul-selo);
   font-weight: 600;
   text-decoration: none;
 }
@@ -125,7 +171,7 @@ function sair() {
 }
 
 .painel__usuario {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
 }
 
@@ -133,15 +179,16 @@ function sair() {
   align-self: flex-start;
   background: none;
   border: none;
-  color: rgba(253, 246, 236, 0.6);
+  color: var(--tinta-fraca);
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   padding: 0;
 }
 
 .painel__sair:hover {
-  color: var(--cor-fundo);
-  text-decoration: underline;
+  color: var(--vermelho-carimbo);
 }
 
 .painel__conteudo {
@@ -155,7 +202,7 @@ function sair() {
     flex-direction: column;
   }
 
-  .painel__barra-lateral {
+  .painel__balcao {
     width: auto;
     height: auto;
     position: static;
